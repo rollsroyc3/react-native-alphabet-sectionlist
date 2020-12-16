@@ -122,13 +122,13 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     backgroundColor: 'transparent',
-    alignItems:'flex-end',
+    alignItems:'center',
     justifyContent:'center',
     right: 5,
     top: 0,
     bottom: 0,
     height: '100%',
-
+    width: 25,
   },
 
   item: {
