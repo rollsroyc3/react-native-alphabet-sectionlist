@@ -126,7 +126,9 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     right: 5,
     top: 0,
-    bottom: 0
+    bottom: 0,
+    height: '100%',
+
   },
 
   item: {
@@ -134,13 +136,17 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontWeight: '700',
-    color: '#008fff'
+    fontWeight: '400',
+    fontSize: 11,
+    color: '#008fff',
+    lineHeight: 13,
   },
 
   inactivetext: {
-    fontWeight: '700',
-    color: '#CCCCCC'
+    fontWeight: '400',
+    fontSize: 11,
+    color: '#CCCCCC',
+    lineHeight: 13,
   }
 });
 
