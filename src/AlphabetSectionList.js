@@ -36,12 +36,14 @@ export default class AlphabetSectionList extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      UIManager.measure(ReactNative.findNodeHandle(this.refs.view), (x, y, w, h) => {
+      const number = ReactNative.findNodeHandle(this.refs.view) || 0
+      const cb = (_x, _y, _w, h) => {
         this.containerHeight = h;
         if (this.props.contentInset && this.props.data && this.props.data.length > 0) {
           this.scrollToSection(Object.keys(this.props.data)[0]);
         }
-      });
+      }
+      UIManager.measure(number,cb);
     }, 0);
   }
 
