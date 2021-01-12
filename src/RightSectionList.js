@@ -123,30 +123,28 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'transparent',
     alignItems:'center',
-    justifyContent:'center',
+    justifyContent:'flex-start',
     right: 5,
-    top: 0,
-    bottom: 0,
-    height: '100%',
-    width: 25,
+    top: 10,
+    bottom: 0
   },
 
   item: {
-    padding: 0
+    paddingVertical: 14,
+    width: 40,
+    alignItems: 'center',
   },
 
   text: {
-    fontWeight: '400',
-    fontSize: 11,
-    color: '#008fff',
-    lineHeight: 13,
+    fontWeight: '700',
+    color: '#535353',
+    fontSize: 16,
   },
 
   inactivetext: {
-    fontWeight: '400',
-    fontSize: 11,
-    color: '#CCCCCC',
-    lineHeight: 13,
+    fontWeight: '700',
+    color: '#A7A7A7',
+    fontSize: 16,
   }
 });
 
