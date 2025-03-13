@@ -32,6 +32,9 @@ export default class AlphabetSectionList extends Component {
     this.onScroll = this.onScroll.bind(this);
     this.onScrollAnimationEnd = this.onScrollAnimationEnd.bind(this);
     this.scrollToSection = this.scrollToSection.bind(this);
+
+    this.myRefView = React.createRef();
+    this.myRefListview = React.createRef();
   }
 
   componentDidMount() {
@@ -151,9 +154,9 @@ export default class AlphabetSectionList extends Component {
     props.style = void 0;
 
     return (
-      <View ref="view" style={[styles.container, this.props.style]}>
+      <View ref={this.myRefView} style={[styles.container, this.props.style]}>
         <SectionList
-          ref="listview"
+          ref={this.myRefListview}
           keyExtractor={(item, index) => item + index}
           {...props}
         />
