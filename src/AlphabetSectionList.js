@@ -39,7 +39,7 @@ export default class AlphabetSectionList extends Component {
 
   componentDidMount() {
     setTimeout(() => {
-      const number = ReactNative.findNodeHandle(this.refs.view) || 0
+      const number = ReactNative.findNodeHandle(this.myRefView) || 0
       const cb = (_x, _y, _w, h) => {
         this.containerHeight = h;
         if (this.props.contentInset && this.props.data && this.props.data.length > 0) {
@@ -57,7 +57,7 @@ export default class AlphabetSectionList extends Component {
     }
     const index = keys.indexOf(section);
 
-    this.refs.listview.scrollToLocation({ sectionIndex: index, itemIndex: 0, animated: true });
+    this.myRefListview.listview.scrollToLocation({ sectionIndex: index, itemIndex: 0, animated: true });
 
     this.props.onScrollToSection && this.props.onScrollToSection(section);
   }
