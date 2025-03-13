@@ -19,6 +19,8 @@ export default class RightSectionList extends Component {
     this.resetSection = this.resetSection.bind(this);
     this.detectAndScrollToSection = this.detectAndScrollToSection.bind(this);
     this.lastSelectedIndex = null;
+
+    this.myRefView = React.createRef();
   }
 
   onSectionSelect(sectionId, fromTouch) {
@@ -48,29 +50,29 @@ export default class RightSectionList extends Component {
     }
   }
 
-  fixSectionItemMeasure() {
-    const sectionItem = this.refs.sectionItem0;
-    if (!sectionItem) {
-      return;
-    }
-    this.measureTimer = setTimeout(() => {
-      sectionItem.measure((x, y, width, height, pageX, pageY) => {
-        this.measure = {
-          y: pageY,
-          width,
-          height
-        };
-      })
-    }, 0);
-  }
+  // fixSectionItemMeasure() {
+  //   const sectionItem = this.myRefView;
+  //   if (!sectionItem) {
+  //     return;
+  //   }
+  //   this.measureTimer = setTimeout(() => {
+  //     sectionItem.measure((x, y, width, height, pageX, pageY) => {
+  //       this.measure = {
+  //         y: pageY,
+  //         width,
+  //         height
+  //       };
+  //     })
+  //   }, 0);
+  // }
 
-  componentDidMount() {
-    this.fixSectionItemMeasure();
-  }
+  // componentDidMount() {
+  //   this.fixSectionItemMeasure();
+  // }
 
-  componentDidUpdate() {
-    this.fixSectionItemMeasure();
-  }
+  // componentDidUpdate() {
+  //   this.fixSectionItemMeasure();
+  // }
 
   componentWillUnmount() {
     this.measureTimer && clearTimeout(this.measureTimer);
@@ -97,15 +99,21 @@ export default class RightSectionList extends Component {
           <Text style={[textStyle, this.props.fontStyle]}>{title}</Text>
         </View>;
 
-        return (
-          <View key={index} ref={'sectionItem' + index} pointerEvents="none">
+      return (
+        index == 0 ?
+          (<View key={index} ref={this.myRefView} pointerEvents="none">
             {child}
-          </View>
-        );
+          </View>) :
+          (
+            <View key={index} pointerEvents="none">
+              {child}
+            </View>
+          )
+      )
     });
 
     return (
-      <View ref="view" style={[styles.container, this.props.style]}
+      <View style={[styles.container, this.props.style]}
         onStartShouldSetResponder={returnTrue}
         onMoveShouldSetResponder={returnTrue}
         onResponderGrant={this.detectAndScrollToSection}
@@ -122,8 +130,8 @@ const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     backgroundColor: 'transparent',
-    alignItems:'center',
-    justifyContent:'flex-start',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     right: 5,
     top: 10,
     bottom: 0
