@@ -17,7 +17,6 @@ export default class RightSectionList extends Component {
 
     this.onSectionSelect = this.onSectionSelect.bind(this);
     this.resetSection = this.resetSection.bind(this);
-    this.detectAndScrollToSection = this.detectAndScrollToSection.bind(this);
     this.lastSelectedIndex = null;
 
     this.myRefView = React.createRef();
@@ -34,45 +33,6 @@ export default class RightSectionList extends Component {
   resetSection() {
     this.lastSelectedIndex = null;
   }
-
-  detectAndScrollToSection(e) {
-    const ev = e.nativeEvent.touches[0] || e.nativeEvent;
-    const targetY = ev.pageY;
-    const { y, width, height } = this.measure;
-    if (!y || targetY < y) {
-      return;
-    }
-    let index = Math.floor((targetY - y) / height);
-    index = Math.min(index, this.props.sections.length - 1);
-    if (this.lastSelectedIndex !== index && this.props.data[this.props.sections[index]].length) {
-      this.lastSelectedIndex = index;
-      this.onSectionSelect(this.props.sections[index], true);
-    }
-  }
-
-  // fixSectionItemMeasure() {
-  //   const sectionItem = this.myRefView;
-  //   if (!sectionItem) {
-  //     return;
-  //   }
-  //   this.measureTimer = setTimeout(() => {
-  //     sectionItem.measure((x, y, width, height, pageX, pageY) => {
-  //       this.measure = {
-  //         y: pageY,
-  //         width,
-  //         height
-  //       };
-  //     })
-  //   }, 0);
-  // }
-
-  // componentDidMount() {
-  //   this.fixSectionItemMeasure();
-  // }
-
-  // componentDidUpdate() {
-  //   this.fixSectionItemMeasure();
-  // }
 
   componentWillUnmount() {
     this.measureTimer && clearTimeout(this.measureTimer);
@@ -116,8 +76,6 @@ export default class RightSectionList extends Component {
       <View style={[styles.container, this.props.style]}
         onStartShouldSetResponder={returnTrue}
         onMoveShouldSetResponder={returnTrue}
-        onResponderGrant={this.detectAndScrollToSection}
-        onResponderMove={this.detectAndScrollToSection}
         onResponderRelease={this.resetSection}
       >
         {sections}
