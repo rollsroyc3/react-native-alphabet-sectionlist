@@ -15,19 +15,10 @@ export default class RightSectionList extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.onSectionSelect = this.onSectionSelect.bind(this);
     this.resetSection = this.resetSection.bind(this);
     this.lastSelectedIndex = null;
 
     this.myRefView = React.createRef();
-  }
-
-  onSectionSelect(sectionId, fromTouch) {
-    this.props.onSectionSelect && this.props.onSectionSelect(sectionId);
-
-    if (!fromTouch) {
-      this.lastSelectedIndex = null;
-    }
   }
 
   resetSection() {
@@ -125,12 +116,7 @@ RightSectionList.propTypes = {
    * Function to provide a title the section list items.
    */
   getSectionListTitle: PropTypes.func,
-
-  /**
-   * Function to be called upon selecting a section list item
-   */
-  onSectionSelect: PropTypes.func,
-
+  
   /**
    * The sections to render
    */
