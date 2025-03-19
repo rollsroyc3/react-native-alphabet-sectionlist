@@ -31,35 +31,9 @@ export default class AlphabetSectionList extends Component {
 
     this.onScroll = this.onScroll.bind(this);
     this.onScrollAnimationEnd = this.onScrollAnimationEnd.bind(this);
-    this.scrollToSection = this.scrollToSection.bind(this);
 
     this.myRefView = React.createRef();
     this.myRefListview = React.createRef();
-  }
-
-  componentDidMount() {
-    setTimeout(() => {
-      const number = ReactNative.findNodeHandle(this.myRefView) || 0
-      const cb = (_x, _y, _w, h) => {
-        this.containerHeight = h;
-        if (this.props.contentInset && this.props.data && this.props.data.length > 0) {
-          this.scrollToSection(Object.keys(this.props.data)[0]);
-        }
-      }
-      UIManager.measure(number,cb);
-    }, 0);
-  }
-
-  scrollToSection(section) {
-    let keys = Object.keys(this.props.data);
-    if (typeof (this.props.compareFunction) === "function") {
-      keys = keys.sort(this.props.compareFunction);
-    }
-    const index = keys.indexOf(section);
-
-    this.myRefListview.listview.scrollToLocation({ sectionIndex: index, itemIndex: 0, animated: true });
-
-    this.props.onScrollToSection && this.props.onScrollToSection(section);
   }
 
   renderSectionHeader({ section: { title } }) {
@@ -112,7 +86,6 @@ export default class AlphabetSectionList extends Component {
     sectionList = !this.props.hideRightSectionList ?
       <RightSectionList
         style={this.props.rightSectionStyle}
-        onSectionSelect={this.scrollToSection}
         sections={sections}
         data={data}
         getSectionListTitle={this.props.getRightSectionListTitle}
@@ -212,11 +185,6 @@ AlphabetSectionList.propTypes = {
    * Function to sort sections. If not provided, the sections order will match data source
    */
   compareFunction: PropTypes.func,
-
-  /**
-   * Callback which should be called when the user scrolls to a section
-   */
-  onScrollToSection: PropTypes.func,
 
   /**
    * A custom element to render for right each section list item
